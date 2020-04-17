@@ -1,0 +1,32 @@
+
+FCNN
+
+> python train_fcnn.py 25000 80 0
+
+> python train_fcnn.py 50000 50 0
+
+> python train_fcnn.py 100000 30 0
+
+> python train_fcnn.py 200000 20 0
+
+> python train_fcnn.py 400000 20 0
+
+> python train_fcnn.py 800000 20 0
+
+> python train_fcnn_noise.py 800000 50 0
+
+CNN
+
+> python train_cnn.py 25000 60 0
+
+> python train_cnn.py 50000 50 0
+
+> python train_cnn.py 100000 50 0
+
+> python train_cnn.py 200000 25 0
+
+> python train_cnn.py 400000 25 0
+
+> python train_cnn.py 800000 25 0
+
+> python train_cnn_noise.py 800000 15 0
