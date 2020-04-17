@@ -4,19 +4,26 @@
 ### Simulate pedigrees
 
 Run sim_code/simFamAJ.R with arguments 1-50 to generate families/simFamAJ_1.RData, ..., families/simFamAJ_50.RData 
+
 $ sh sim_code/simFamAJ.sh
 (1,000,000 families in total, 20,000 in each RData file)
 
 To get perturbed versions of the families, run sim_code/simFamNoise.R with arguments 1-50 to generate families/simFamNoise_1.RData, ..., families/simFamNoise_50.RData 
-$  sh sim_code/simFamAJ_noise.sh
+
+$  sh sim_code/simFamAJ_noise.sh 
+
 
 
 ### Run BRCAPRO 
 
-Run sim_code/run_brcapro_AJ.R with arguments 1-50 to generate brcapro_results/brcapro_AJ_1.RData, ..., brcapro_results/brcapro_AJ_50.RData. Run sim_code/run_brcapro_noise.R with arguments 1-50 to generate brcapro_results/brcapro_noise_1.RData, ..., brcapro_results/brcapro_noise_50.RData.
-$  cd sim_code
-$  sbatch --array=1-50 run_brcapro_AJ_array.sh
-$  sbatch --array=1-50 run_brcapro_noise_array.sh
+Run sim_code/run_brcapro_AJ.R with arguments 1-50 to generate brcapro_results/brcapro_AJ_1.RData, ..., brcapro_results/brcapro_AJ_50.RData. Run sim_code/run_brcapro_noise.R with arguments 1-50 to generate brcapro_results/brcapro_noise_1.RData, ..., brcapro_results/brcapro_noise_50.RData. 
+
+$  cd sim_code 
+
+$  sbatch --array=1-50 run_brcapro_AJ_array.sh 
+
+$  sbatch --array=1-50 run_brcapro_noise_array.sh 
+
 (run on the cluster)
 
 
