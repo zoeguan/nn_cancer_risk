@@ -15,7 +15,9 @@ To get perturbed versions of the families, run sim_code/simFamNoise.R with argum
 
 Run sim_code/run_brcapro_AJ.R with arguments 1-50 to generate brcapro_results/brcapro_AJ_1.RData, ..., brcapro_results/brcapro_AJ_50.RData. Run sim_code/run_brcapro_noise.R with arguments 1-50 to generate brcapro_results/brcapro_noise_1.RData, ..., brcapro_results/brcapro_noise_50.RData.
 > cd sim_code
+
 > sbatch --array=1-50 run_brcapro_AJ_array.sh
+
 > sbatch --array=1-50 run_brcapro_noise_array.sh
 (run on the cluster)
 
