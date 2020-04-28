@@ -106,6 +106,10 @@ def soft_AUC_theano(y_true, y_pred):
     # Take average 
     return theano.tensor.mean(stats) 
 
+
+def oe(y_true, y_pred):
+   return theano.tensor.sum(y_true)/theano.tensor.sum(y_pred)
+
 ### train FCNN
 
 nn_input = pd.read_csv('../nn_input/nn_input.csv', low_memory=False)
@@ -146,7 +150,7 @@ fcnn.add(Dense(30, input_shape=(X_train.shape[1],), activation='elu'))
 fcnn.add(Dropout(0.2))
 fcnn.add(Dense(10, activation='elu'))
 fcnn.add(Dense(1, activation='sigmoid') )
-fcnn.compile(loss='mean_squared_error', optimizer='Adam', metrics=[soft_AUC_theano])
+fcnn.compile(loss='mean_squared_error', optimizer='Adam', metrics=[soft_AUC_theano, oe])
 history = fcnn.fit(X_train[0:max_train], y_train[0:max_train], 
                    epochs=epochs,
                    batch_size=512, verbose=0, validation_split=0.1)
@@ -158,7 +162,7 @@ results ={'auc': perf_boot[0:3],
          'oe': perf_boot[3:6],
          'bs': perf_boot[6:9]}
 
-filename = "../tuning_results/res_val_" + str(max_train) + "_" + str(epochs)
+filename = "../tuning_results/res_val_" + str(max_train) + "_" + str(epochs) + ".csv"
 results_df = pd.DataFrame(data=results)
 results_df.to_csv(filename)
 
@@ -170,6 +174,9 @@ import matplotlib.pyplot as plt
 figname = "../tuning_results/val_loss_" + str(max_train) + "_" + str(epochs)
 fig = plt.figure()
 plt.plot(history.history['val_loss'])
+ymin = min(history.history['val_loss']) - 0.00005
+ymax = min(history.history['val_loss']) + 0.0005
+plt.ylim(ymin, ymax)
 fig.savefig(figname)
 plt.close(fig)
 
@@ -179,3 +186,9 @@ fig2 = plt.figure()
 plt.plot(history.history['val_soft_AUC_theano'])
 fig2.savefig(figname)
 plt.close(fig2)
+
+figname = "../tuning_results/val_oe_" + str(max_train) + "_" + str(epochs)
+fig3 = plt.figure()
+plt.plot(history.history['val_oe'])
+fig3.savefig(figname)
+plt.close(fig3)

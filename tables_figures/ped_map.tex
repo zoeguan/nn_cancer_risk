@@ -1,0 +1,389 @@
+\documentclass{article}
+\usepackage[english,ngerman]{babel}
+\usepackage[all]{genealogytree}
+\usepackage{lscape}
+
+\begin{document}
+
+% use greyscale for nodes
+\definecolor{red}{gray}{0.2}
+\definecolor{blue}{gray}{0.2}
+%\definecolor{green}{gray}{0.8}
+%\definecolor{yellow}{gray}{0.6}
+\definecolor{violet}{gray}{0.5}
+\definecolor{orange}{gray}{0.4}
+
+
+\title{Pedigree Mapping Example}
+\date{}
+
+\maketitle{}
+
+\section*{Original Pedigree}
+\begin{genealogypicture}[
+  timeflow=down,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=8mm to 5cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+    neuter/.style={colback=green!20,arc=0.5mm},
+  },
+  blankm/.style={box={colback=white,sharp corners}},
+  blankf/.style={box={colback=white,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={black,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+  parent{
+    g[male]{$H_{13}$}
+    c[female, box={fuzzy halo}]{$H_0$}
+    parent{
+    c[male]{$H_5$}
+      c[female]{$H_6$}
+      g[male]{$H_7$}
+      p[male]{$H_1$}
+      p[female]{$H_2$}
+    }
+    parent{
+      g[female]{$H_8$}
+      c[male]{$H_9$}
+      c[male]{$H_{10}$}
+      c[female]{$H_{11}$}
+      c[female]{$H_{12}$}
+      p[male]{$H_3$}
+      p[female]{$H_4$}
+    }
+  }
+\end{genealogypicture}
+
+\vspace{0.5cm}
+Blue rectangles represent males. Red circles represent females.
+
+\vspace{2cm}
+
+\section*{Mapped Pedigree with $m=2$ Sons and $m=2$ Daughters per Couple}
+\begin{genealogypicture}[
+  timeflow=down,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=8mm to 5cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+    neuter/.style={colback=green!20,arc=0.5mm},
+  },
+  blankm/.style={box={colback=blue!10,sharp corners}},
+  blankf/.style={box={colback=red!10,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={black,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+  
+
+  
+    parent{
+    c[male]{$H_{13}$}
+    c[blankm]{$H_{15}$}
+    g[female, box={fuzzy halo}]{$H_0$}
+    c[blankf]{$H_{16}$}
+    
+    parent{
+     c[male]{$H_5$}
+      c[female]{$H_6$}
+      c[blankf]{$H_{14}$}
+      g[male]{$H_7$}
+      p[male]{$H_1$}
+      p[female]{$H_2$}
+    }
+    
+    parent{
+      g[female]{$H_8$}
+      c[male]{$H_9$}
+      c[male]{$H_{10}$}
+      c[female]{$H_{11}$}
+      p[male]{$H_3$}
+      p[female]{$H_4$}
+
+    }
+  }
+  
+
+
+
+  
+\end{genealogypicture}
+
+\vspace{0.5cm}
+Faded nodes represent relatives who were not in the original pedigree. 
+
+
+\vspace{2cm}
+
+\section*{Flatten Mapped Pedigree}
+\begin{genealogypicture}[
+  timeflow=down,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=8mm to 5cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+  },
+    blankm/.style={box={colback=blue!5,sharp corners}},
+  blankf/.style={box={colback=red!5,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={white,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+  parent{
+  g[female, box={fuzzy halo}]{$H_0$}
+  	g[male]{$H_1$}
+    g[female]{$H_2$}
+    g[male]{$H_3$}
+    g[female]{$H_4$}
+    g[male]{$H_7$}
+    g[male]{$H_5$}
+    g[female]{$H_{6}$}
+    g[blankf]{$H_{14}$}
+    g[female]{$H_{8}$}
+    g[male]{$H_{9}$}
+    g[male]{$H_{10}$}
+    g[female]{$H_{11}$}
+    g[male]{$H_{13}$}
+    g[blankm]{$H_{15}$}
+    g[blankf]{$H_{16}$}
+  }
+\end{genealogypicture}
+
+\vspace{1cm}
+
+\begin{genealogypicture}[
+  timeflow=right,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=6mm to 8cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+  },
+    blankm/.style={box={colback=blue!5,sharp corners}},
+  blankf/.style={box={colback=red!5,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={white,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+  parent{
+  g[female, box={fuzzy halo}]{$\, H_0 \,$}
+  	g[male]{$\, H_1 \,$}
+    g[female]{$\, H_2 \,$}
+    g[male]{$\, H_3 \,$}
+    g[female]{$\, H_4 \,$}
+    g[male]{$\, H_7 \,$}
+    g[male]{$\, H_5 \,$}
+    g[female]{$\, H_{6} \,$}
+    g[blankf]{$H_{14} \,$}
+    g[female]{$\, H_{8} \,$}
+    g[male]{$ \,H_{9} \,$}
+    g[male]{$H_{10}$}
+    g[female]{$H_{11}$}
+    g[male]{$H_{13}$}
+    g[blankm]{$H_{15}$}
+    g[blankf]{$H_{16}$}
+  }
+\end{genealogypicture}
+
+
+\newpage
+
+\begin{genealogypicture}[
+  timeflow=down,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=8mm to 5cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+  },
+    blankm/.style={box={colback=blue!5,sharp corners}},
+  blankf/.style={box={colback=red!5,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={black,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+
+  	
+parent{
+  	g[male]{}
+      }
+
+\end{genealogypicture}
+
+
+
+\vspace{0.3cm}
+
+\begin{genealogypicture}[
+  timeflow=down,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=8mm to 5cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+  },
+    blankm/.style={box={colback=blue!5,sharp corners}},
+  blankf/.style={box={colback=red!5,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={black,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+
+  	
+parent{
+  	g[female]{}
+      }
+
+\end{genealogypicture}
+
+
+\vspace{0.3cm}
+
+\begin{genealogypicture}[
+  timeflow=down,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=8mm to 5cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+  },
+    blankm/.style={box={colback=blue!5,sharp corners}},
+  blankf/.style={box={colback=red!5,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={black,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+
+  	
+parent{
+  	g[female, box={fuzzy halo}]{}
+      }
+
+\end{genealogypicture}
+
+\vspace{0.3cm}
+
+\begin{genealogypicture}[
+  timeflow=down,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=8mm to 5cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+  },
+    blankm/.style={box={colback=blue!5,sharp corners}},
+  blankf/.style={box={colback=red!5,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={black,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+
+  	
+parent{
+  	g[blankm]{}
+      }
+
+\end{genealogypicture}
+
+
+\vspace{0.3cm}
+
+\begin{genealogypicture}[
+  timeflow=down,               % time flows from right to left
+  processing=tcbox*,         % draw nodes with tcolorbox
+  node size from=8mm to 5cm,   % width of nodes
+  level size=6mm,            % height of nodes
+  level distance=1cm,          % generation distance
+                               % redefine default setting for female,male,neuter:
+  tcbset={
+    female/.style={colback=red!45,arc=3mm},
+    male/.style={colback=blue!45,sharp corners},
+  },
+    blankm/.style={box={colback=blue!5,sharp corners}},
+  blankf/.style={box={colback=red!5,arc=3mm}},
+  %
+  box={colback=black,size=fbox,valign=center},    % node settings
+  %
+  edges={foreground={black,line width=0.25mm},    % edge settings
+         background={white,line width=0.5mm}}
+]
+
+  %%%%%% the graph %%%%%%
+
+
+  	
+parent{
+  	g[blankf]{}
+      }
+
+\end{genealogypicture}
+
+
+
+
+
+
+
+
+\end{document}

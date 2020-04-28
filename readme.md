@@ -1,6 +1,3 @@
-
-
-
 ### Simulate pedigrees
 
 Run sim_code/simFamAJ.R with arguments 1-50 to generate families/simFamAJ_1.RData, ..., families/simFamAJ_50.RData 
@@ -39,3 +36,8 @@ Run sim_code/graph_mat.R to generate nn_input/graph_mat.csv (neighborhood matrix
 ### Train NNs
 
 Run the python scripts in training_code/fcnn_cnn.txt to generate results/*.csv (files with predictions prefixed by "pred", files with performance metrics prefixed by "res")
+
+
+### Generate tables and figures
+
+Run R scripts in tables_figures

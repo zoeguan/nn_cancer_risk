@@ -34,6 +34,8 @@ from keras.layers import Dropout
 from graph_convolution import GraphConv
 from graph_convolution_pro import GraphConvPro
 
+import theano.ifelse
+
 import keras.backend as K
 
 def mse(y_true, y_pred):
