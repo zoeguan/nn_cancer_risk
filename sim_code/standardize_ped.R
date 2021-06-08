@@ -58,10 +58,15 @@ standardize_ped = function(ped, rel.types = rel.types.ref, fixed.rels=c("Mother"
     # actual relatives of type i from families that require pruning wrt i
     subset.2 = rel.i[which(rel.i$FamID %in% ped.std$FamID[which(ped.std$Freq > num.i)]), names(null.vals)]
     # sample the required number of relatives
-    subset.2 = data.frame(subset.2 %>% group_by(FamID) %>% sample_n(size=num.i))
+    if (nrow(subset.2)>0) {
+      subset.2 = data.frame(subset.2 %>% group_by(FamID) %>% sample_n(size=num.i))
+      rel.i = rbind(subset.1, subset.2)
+    } else {
+      rel.i = subset.1
+    }
+    
     
     # combine inputs for relatives of type i
-    rel.i = rbind(subset.1, subset.2)
     rel.i = rel.i[order(rel.i$FamID), ]
     rel.i$num = rep(paste0(suffix.i, 1:num.i), length(unique(rel.i$FamID)))
     # flatten inputs
