@@ -7,18 +7,20 @@ rel.names = setdiff(gsub("AgeB|_", "" ,names(nn.input)[which(grepl("AgeB", names
 
 prop.missing = c(0.05, 0.1, 0.3)
 
+ind.train = 87354:887353
+
 # missing diagnosis ages
 set.seed(1)
 for (i in prop.missing) {
   print(i)
   nn.input.i = nn.input
   for (rel.type in rel.names) {
-    ind.aff = which(nn.input[87354:887353, paste0("AffB_", rel.type)]==1)
-    ind.sample = sample(ind.aff, round(i*length(ind.aff)), replace=F)
+    ind.aff = which(nn.input[, paste0("AffB_", rel.type)]==1)
+    ind.sample = intersect(sample(ind.aff, round(i*length(ind.aff)), replace=F), ind.train)
     nn.input.i[ind.sample, paste0("AgeB_", rel.type)] = pmin(50, nn.input.i[ind.sample, paste0("Age_", rel.type)])
     
-    ind.aff.ov = which(nn.input[87354:887353, paste0("AffO_", rel.type)]==1)
-    ind.sample = sample(ind.aff.ov, round(i*length(ind.aff.ov)), replace=F)
+    ind.aff.ov = which(nn.input[, paste0("AffO_", rel.type)]==1)
+    ind.sample = intersect(sample(ind.aff.ov, round(i*length(ind.aff.ov)), replace=F), ind.train)
     nn.input.i[ind.sample, paste0("AgeO_", rel.type)] = pmin(50, nn.input.i[ind.sample, paste0("Age_", rel.type)])
   }
   save(nn.input.i, file=paste0("../nn_input/nn_input_missingages", i, ".RData"))
@@ -38,8 +40,8 @@ for (i in prop.missing) {
   print(i)
   nn.input.i = nn.input
   for (rel.type in rel.names) {
-    ind.aff = which(nn.input[87354:887353, paste0("Miss_", rel.type)]==0)
-    ind.sample = sample(ind.aff, round(i*length(ind.aff)), replace=F)
+    ind.aff = which(nn.input[, paste0("Miss_", rel.type)]==0)
+    ind.sample = intersect(sample(ind.aff, round(i*length(ind.aff)), replace=F), ind.train)
     nn.input.i[ind.sample, paste0(c("AffB_", "AgeB_", "AffO_", "AgeO_", "Age_"), rel.type)] = 0
     nn.input.i[ind.sample, paste0(c("Miss_"), rel.type)] = 1
   }
@@ -60,8 +62,8 @@ for (i in prop.missing) {
   print(i)
   nn.input.i = nn.input
   for (rel.type in rel.names) {
-    ind.aff = which(nn.input[87354:887353, paste0("AffB_", rel.type)]==0 & nn.input[87354:887353, paste0("AffO_", rel.type)]==0)
-    ind.sample = sample(ind.aff, round(i*length(ind.aff)), replace=F)
+    ind.aff = which(nn.input[, paste0("AffB_", rel.type)]==0 & nn.input[ind.train, paste0("AffO_", rel.type)]==0)
+    ind.sample = intersect(sample(ind.aff, round(i*length(ind.aff)), replace=F), ind.train)
     nn.input.i[ind.sample, paste0(c("AffB_", "AgeB_", "AffO_", "AgeO_", "Age_"), rel.type)] = 0
     nn.input.i[ind.sample, paste0(c("Miss_"), rel.type)] = 1
   }
